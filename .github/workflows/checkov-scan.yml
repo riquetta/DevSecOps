@@ -43,8 +43,8 @@ jobs:
           # Run Checkov with separate output paths for CSV and JSON
           checkov -d ./infra --quiet \
             --output cli \
-            --output csv --output-file-path reports/checkov-report-csv-${{ steps.timestamp.outputs.timestamp }} \
-            --output json --output-file-path reports/checkov-report-json-${{ steps.timestamp.outputs.timestamp }}
+            --output csv --output-file-path reports/checkov-report-csv-${{ steps.timestamp.outputs.timestamp }}.csv \
+            --output json --output-file-path reports/checkov-report-json-${{ steps.timestamp.outputs.timestamp }}.json
 
       - name: List Reports Directory
         run: ls -la reports/
@@ -55,4 +55,6 @@ jobs:
         if: always()
         with:
           name: checkov-scan-reports-${{ steps.timestamp.outputs.timestamp }}
-          path: reports/
+          path: |
+            reports/checkov-report-csv-${{ steps.timestamp.outputs.timestamp }}.csv
+            reports/checkov-report-json-${{ steps.timestamp.outputs.timestamp }}.json
