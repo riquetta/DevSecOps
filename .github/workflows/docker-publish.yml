@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'app/**'         # Only trigger when files in the app folder change
+      - '.github/workflows/docker-publish.yml'  
   workflow_dispatch:
 
 jobs:
@@ -26,7 +29,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./app
+          file: ./app/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-ci:latest
 

@@ -1,0 +1,34 @@
+name: IaC Security Scan (Checkov)
+
+on:
+  push:
+    branches:
+      - main
+      - infra
+  pull_request:
+    branches:
+      - main
+      - infra
+  workflow_dispatch:
+
+jobs:
+  checkov-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Checkov
+        run: |
+          pip install checkov
+
+      - name: Run Checkov on Terraform directory
+        run: |
+          echo "🔍 Running Checkov scan on Terraform code..."
+          checkov -d ./infra --quiet --output cli
