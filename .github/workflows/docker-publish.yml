@@ -55,12 +55,13 @@ jobs:
         run: |
           docker push $IMAGE_NAME:$IMAGE_TAG
 
-      trigger-deploy:
-        needs: build-scan-push
-        if: success()
-        runs-on: ubuntu-latest
-        steps:
-          - name: Trigger Infra + Deploy Workflow
-            uses: peter-evans/workflow-dispatch@v1
-            with:
-            workflow: "infra-deploy.yml"          
+  trigger-deploy:
+    needs: build-and-scan
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Infra + Deploy Workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: deploy-infrastructure
+          token: ${{ secrets.GITHUB_TOKEN }}
