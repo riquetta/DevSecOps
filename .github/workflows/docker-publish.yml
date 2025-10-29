@@ -54,3 +54,13 @@ jobs:
         if: success()
         run: |
           docker push $IMAGE_NAME:$IMAGE_TAG
+
+      trigger-deploy:
+        needs: build-scan-push
+        if: success()
+        runs-on: ubuntu-latest
+        steps:
+          - name: Trigger Infra + Deploy Workflow
+            uses: peter-evans/workflow-dispatch@v1
+            with:
+            workflow: "infra-deploy.yml"          
