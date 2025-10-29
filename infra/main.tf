@@ -18,7 +18,7 @@ account_replication_type = "LRS"
 public_network_access_enabled = false
 
 
-# Recommended: disable public network access and use private endpoints for production
+# Recommended: disable public network access and use private endpoints for production!
 network_rules {
   default_action = "Deny"
 }
@@ -44,7 +44,7 @@ vm_size = "Standard_D2s_v3"
 
 
 # then inside default_node_pool: # Will be deprecated
-node_taints = [for t in var.node_taints_obj : "${t.key}=${t.value}:${t.effect}"]
+#node_taints = [for t in var.node_taints_obj : "${t.key}=${t.value}:${t.effect}"]
 
 }
 
