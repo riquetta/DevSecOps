@@ -16,3 +16,8 @@ output "kube_config" {
   value     = azurerm_kubernetes_cluster.aks.kube_config_raw
   sensitive = true
 }
+
+output "subscription_id_from_keyvault" {
+  value     = data.azurerm_key_vault_secret.sub_id.value
+  sensitive = true
+}

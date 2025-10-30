@@ -36,7 +36,7 @@ dns_prefix = "aksdemo"
 
 default_node_pool {
 name = "agentpool"
-node_count = 2
+node_count = 1
 vm_size = "Standard_D2s_v3"
 
 

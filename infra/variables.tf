@@ -53,3 +53,20 @@ variable "node_taints_obj" {
   type = list(object({ key = string, value = string, effect = string }))
   default = []
 }
+
+variable "keyvault_name" {
+  type = string
+  default = "keyvault-tf-1"
+  
+}
+
+variable "keyvault_resource_group_name" {
+  description = "Name of the resource group containing the Key Vault"
+  type        = string
+  default     = "tf"
+}
+
+variable "subscription_id" {
+  type = string
+  #default = "subscription_id"
+}
