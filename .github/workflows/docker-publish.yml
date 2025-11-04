@@ -64,4 +64,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           event-type: deploy-infrastructure
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Use a personal access token (set as a repo secret) instead of GITHUB_TOKEN.
+          # Create a PAT with 'repo' and 'workflow' scopes and save it as
+          # a repository secret named REPO_DISPATCH_TOKEN.
+          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
